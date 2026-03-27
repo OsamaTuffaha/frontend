@@ -1,5 +1,8 @@
 import axios from "axios";
 
+// 🔥 API base URL من Vercel env
+const API = import.meta.env.VITE_API_URL;
+
 // 🔥 helper تجيب التوكن
 const getAuthHeader = () => {
   const token = localStorage.getItem("token");
@@ -14,7 +17,7 @@ const getAuthHeader = () => {
 // 📥 users
 export const getUsers = async () => {
   const result = await axios.get(
-    "http://localhost:5000/user",
+    `${API}/user`,
     getAuthHeader()
   );
   return result.data.users;
@@ -23,7 +26,7 @@ export const getUsers = async () => {
 // ✏️ update
 export const updateUser = async (id, user_name, email, phone_number) => {
   const result = await axios.put(
-    `http://localhost:5000/user/update/${id}`,
+    `${API}/user/update/${id}`,
     {
       user_name,
       email,
@@ -37,7 +40,7 @@ export const updateUser = async (id, user_name, email, phone_number) => {
 // ❌ delete
 export const deleteUser = async (id) => {
   const result = await axios.put(
-    `http://localhost:5000/user/${id}`,
+    `${API}/user/${id}`,
     {},
     getAuthHeader()
   );
@@ -54,7 +57,7 @@ export const addCategory = async (cat_name, image) => {
   const token = localStorage.getItem("token");
 
   const result = await axios.post(
-    "http://localhost:5000/category/add",
+    `${API}/category/add`,
     formData,
     {
       headers: {
@@ -70,7 +73,7 @@ export const addCategory = async (cat_name, image) => {
 // 📂 get category
 export const getCategory = async () => {
   const result = await axios.get(
-    "http://localhost:5000/category",
+    `${API}/category`,
     getAuthHeader()
   );
   return result.data;
@@ -81,7 +84,7 @@ export const addQuestion = async (data) => {
   const token = localStorage.getItem("token");
 
   return await axios.post(
-    "http://localhost:5000/question/add",
+    `${API}/question/add`,
     data,
     {
       headers: {
@@ -95,7 +98,7 @@ export const addQuestion = async (data) => {
 // 📂 get questions
 export const getQuestionsByCategory = async (id) => {
   const res = await axios.get(
-    `http://localhost:5000/question/category/${id}`,
+    `${API}/question/category/${id}`,
     getAuthHeader()
   );
   return res.data.data;
@@ -104,7 +107,7 @@ export const getQuestionsByCategory = async (id) => {
 // ❌ delete question
 export const deleteQuestion = async (id) => {
   await axios.delete(
-    `http://localhost:5000/question/${id}`,
+    `${API}/question/${id}`,
     getAuthHeader()
   );
 };

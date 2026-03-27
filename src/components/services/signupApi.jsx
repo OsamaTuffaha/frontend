@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const API = import.meta.env.VITE_API_URL;
+
 const signupApi = async (user_name, email, phone_number, password) => {
-  const result = await axios.post("http://localhost:5000/user/register", {
+  const result = await axios.post(`${API}/user/register`, {
     user_name,
     email,
     phone_number,
