@@ -25,6 +25,7 @@ const Login = () => {
       const data = await loginApi(email, password);
       console.log("SUCCESS:", data);
       setMessage(data.message);
+      console.log("API:", import.meta.env.VITE_API_URL);
 
       // خزّن البيانات
       dispatch(setToken(data.token));
@@ -38,6 +39,7 @@ const Login = () => {
     } catch (error) {
       console.log("ERROR:", error.response?.data);
       setMessage(error.response?.data?.message || error.message);
+      console.log("API:", import.meta.env.VITE_API_URL);
     }
   };
 
